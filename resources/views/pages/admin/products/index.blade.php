@@ -33,21 +33,21 @@
                             <th scope="col">Title</th>
                             <th scope="col">Price</th>
                             <th scope="col">Category</th>
-                            <th scope="col">Color</th>
                             <th scope="col">Image</th>
-                            <th scope="col">Action</th>
+                            <th scope="col">Date Created</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($products as $product)
                             <tr>
-                                <th scope="row">1</th>
+                                <td>{{$product->id}}</td>
                                 <td>{{$product->title}}</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>{{$product->price}}</td>
+                                <td>{{$product->category->name}}</td>
+                                <td><img src="{{asset('storage/'.$product->image)}}" alt=""></td>
+                                <td>{{$product->created_at}}</td>
+                                <td></td>
                             </tr>
                         @endforeach
                         </tbody>

@@ -30,21 +30,48 @@
                    <div class="card-header">
                        Add New Product
                    </div>
+                   @if ($errors->any())
+                       <div class="alert alert-danger">
+                           <ul>
+                               @foreach ($errors->all() as $error)
+                                   <li>{{ $error }}</li>
+                               @endforeach
+                           </ul>
+                       </div>
+                   @endif
                    <div class="card-body">
-                       <form action="" method="post">
+                       <form action="{{route('adminpanel.products.store')}}" method="post" enctype="multipart/form-data">
+                           @csrf
                            <div class="mb-3">
-                               <label for="" class="form-label">Email address</label>
-                               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                               <label for="" class="form-label">Tile</label>
+                               <input type="text" class="form-control" id="title" name="title">
                            </div>
                            <div class="mb-3">
-                               <label for="exampleInputPassword1" class="form-label">Password</label>
-                               <input type="password" class="form-control" id="exampleInputPassword1">
+                               <label for="" class="form-label">Price</label>
+                               <input type="text" class="form-control" id="price" name="price">
                            </div>
                            <div class="mb-3 form-check">
-                               <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                               <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                               <label for="" class="form-label">Select Category</label>
+                               <select name="category_id" class="form-control">
+                                   <option value="">--Select Category--</option>
+                                   @foreach($categories as $category)
+                                       <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+                                   @endforeach
+                               </select>
                            </div>
+
+                           <div class="mb-3 form-check">
+                               <label for="" class="form-label">Select Color</label>
+                                   @foreach($colors as $color)
+                                       <input type="checkbox" name="colors[]" class="form-check-input" value="{{$color->id}}">
+                                   @endforeach
+                           </div>
+                           <div class="mb-3">
+                               <label for="" class="form-label">Image</label>
+                               <input type="file" class="form-control" id="image" name="image">
+                           </div>
+                           <textarea class="form-control" name="description" id="" cols="30" rows="10"></textarea>
+
                            <button type="submit" class="btn btn-primary">Submit</button>
                        </form>
                    </div>
